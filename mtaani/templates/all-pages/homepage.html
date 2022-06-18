@@ -2,4 +2,42 @@
 
 {% block content %}
 <h1> {{title}} </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {% for post in posts %}
+                    <div class="">
+                        <div class="card-header">
+                            <div class="card-body" height="18rem">
+                                <p>User:{{post.post_user}} </p>
+                                <P>Title: {{post.post_title}}</P>
+                                <P>Description: {{post.post_description}}</P>
+                                <P>Profile: {{post.post_profile}}</P>
+                                <P>Neighbourhood: {{post.post_neighbourhood}}</P>
+                                <P>Business: {{post.post_business}}</P>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for neighbourhood in neighbourhoods %}
+                <div class="">
+                    <div class="card-header">
+                        <div class="card-body" height="18rem">
+                            <p>{{neighbourhood.name}}</p>
+                            <p>Admin:{{neighbourhood.neighbourhood_admin}}</p>
+                        </div>
+                        <div class="card-footer">
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
 {% endblock %}
