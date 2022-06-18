@@ -45,11 +45,28 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} - Profile'
     
-    
 class Post(models.Model):
-    title = models.CharField(max_length=120, null=True)
-    post = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
-    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='hood_post')
-
+    post_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="posts")
+    post_title = models.CharField(max_length=255, blank=True)
+    post_description = models.TextField(max_length=255)
+    post_rofile=models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    
+    def save_post(self):
+        self.save()
+        
+    def delete_post(self):
+        self.delete()
+    
+    @classmethod
+    def all_posts(cls):
+        return cls.objects.all()
+    
+    
+    @classmethod
+    def get_profile_image(cls, profile):
+        posts = Post.objects.filter(user__pk=profile)
+        return posts
+        
+    def __str__(self):
+        return f'{self.title}'
