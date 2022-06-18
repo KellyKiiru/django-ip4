@@ -44,13 +44,34 @@ class Profile(models.Model):
     
     def __str__(self):
         return f'{self.user.username} - Profile'
-    
+
+class Business(models.Model):
+    business_name = models.CharField(max_length=120)
+    business_email = models.EmailField(max_length=254)
+    business_description = models.TextField(blank=True)
+    business_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='business')
+    business_user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
+
+    def __str__(self):
+        return f'{self.name} Business'
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def search_business(cls, name):
+        return cls.objects.filter(name__icontains=name).all()
+
 class Post(models.Model):
     post_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="posts")
     post_title = models.CharField(max_length=255, blank=True)
     post_description = models.TextField(max_length=255)
-    post_rofile=models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post_profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
     post_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    post_business = models.ForeignKey(Business, on_delete=models.CASCADE)
     
     def save_post(self):
         self.save()
