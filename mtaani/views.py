@@ -36,6 +36,19 @@ def edit_profile(request,username):
     else:
         form = UpdateProfileForm()
     return render(request, 'all-pages/edit_profile.html', {'form': form})
+
+
+def create_new_hood(request):
+    if request.method == 'POST':
+        form = NeighbourhoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.admin = request.user.profile
+            hood.save()
+            return redirect('hood')
+    else:
+        form = NeighbourhoodForm()
+    return render(request, 'all-pages/new_hood.html', {'form': form})
         
 def hoods(request):
     all_hoods = Neighbourhood.objects.all()
