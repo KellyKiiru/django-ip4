@@ -1,4 +1,5 @@
 
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
@@ -34,3 +35,10 @@ def edit_profile(request,username):
             return redirect('profile', user.username)
     else:
         form = UpdateProfileForm(instance=request.user.profile)
+        
+def hoods(request):
+    all_hoods = Neighbourhood.objects.all()
+    context = {
+        'all_hoods': all_hoods,
+    }
+    return render(request, 'all-pages/all_hoods.html', context)
