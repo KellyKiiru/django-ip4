@@ -1,3 +1,4 @@
+from pyexpat import model
 from .models import *
 from django import forms
 
@@ -10,3 +11,10 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ('profile_user','Neighbourhood')
+
+
+class NeighbourhoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighbourhood
+        exclude =('neighbourhood_admin',)
+        
