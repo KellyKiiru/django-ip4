@@ -54,8 +54,8 @@
                                                                                   alt="{{user.username}}">
                           </a>
                           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                              <a class="dropdown-item text-center" href="" style="font-size: medium;">Profile</a>
-                              <a class="dropdown-item text-center" href="" style="font-size: medium;">Edit profile</a>
+                              <a class="dropdown-item text-center" href=" {% url 'profile'%} " style="font-size: medium;">Profile</a>
+                              <a class="dropdown-item text-center" href=" {% url 'edit_profile' user.username %}" style="font-size: medium;">Edit profile</a>
                               <a href="/accounts/logout/" class="text-secondary text-center dropdown-item" style="font-size: medium;">Log Out</a>
       
       
