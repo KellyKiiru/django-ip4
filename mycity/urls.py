@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/clearcache/', include('clearcache.urls')),
     path('admin/', admin.site.urls),
     path('',include('mtaani.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
 ]

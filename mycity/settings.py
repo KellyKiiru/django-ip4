@@ -170,7 +170,8 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGOUT_REDIRECT_URL='/'
 
-
+LOGIN_REDIRECT_URL='/'
 # Configure Django App for Heroku.
 django_on_heroku.settings(locals()) 
