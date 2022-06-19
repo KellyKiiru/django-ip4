@@ -10,6 +10,7 @@ urlpatterns =[
     path('logout/', auth_views.LogoutView.as_view(),name='logout'),
     path('profile/<username>',views.profile,name='profile'),
     path('edit_profile/<username>',views.edit_profile,name='edit_profile'),
+    path('all-hoods/', views.hoods, name='hood'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
