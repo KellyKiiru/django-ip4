@@ -11,6 +11,7 @@ urlpatterns =[
     path('profile/',views.profile,name='profile'),
     path('edit_profile/<username>',views.edit_profile,name='edit_profile'),
     path('all-hoods/', views.hoods, name='hood'),
+    path('new-hood/', views.create_new_hood, name='new-hood'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
