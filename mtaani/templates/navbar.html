@@ -1,1 +1,98 @@
-<h1>dwlq</h1>
+<!doctype html>
+<html lang="en">
+
+<body>
+
+
+  <div class="site-mobile-menu">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-close2 js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div>
+
+  <header class="site-navbar" role="banner">
+
+    <div class="container">
+      <div class="row align-items-center">
+
+        
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
+          <div class="container">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li>
+                      <div class="col-11 col-xl-2">
+                        <a href="index.html" class="text-white mb-0"><img class="mb-0 site-logo" height="50px"
+                            src="https://www.pngkey.com/png/full/235-2350076_gmw-host-clipart-library-people-icon-png-white.png"
+                            alt="logo-icon"></a>
+                      </div>
+                    </li>
+                      <li class="nav-item active">
+                        
+                          <form class="form-inline" method="get" action="">
+                              {% csrf_token %}
+                              <div class="md-form my-0">
+                                  <input class="form-control mr-sm-2 " type="text" placeholder="Search" name="title" aria-label="Search">
+                              </div>
+                          </form>
+                      </li>
+                  </ul>
+                  <ul   class="navbar-nav navbar-right">
+                      {% if user.is_authenticated%}
+                      <li class="nav-item dropdown">
+                          <a style="color: black; font-size: large;" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                             aria-haspopup="true"
+                             aria-expanded="false">{{ user.username|title }} <img style="height:40px;" class="rounded-circle nav-img"
+                                                                                  src="{{user.profile.profile_picture.url}}"
+                                                                                  alt="{{user.username}}">
+                          </a>
+                          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item text-center" href="" style="font-size: medium;">Profile</a>
+                              <a class="dropdown-item text-center" href="" style="font-size: medium;">Edit profile</a>
+                              <a href="/accounts/logout/" class="text-secondary text-center dropdown-item" style="font-size: medium;">Log Out</a>
+      
+      
+                          </div>
+                      </li>
+                      {% else %}
+                      <a href="{% url 'login'%}" class="login btn btn-sm btn-info" style="font-size: medium;"> REGISTER/LOGIN </a>
+                      {% endif %}
+                      <a href="">
+                          <button class="btn btn-info btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl" style="font-size: medium;">
+                              
+                          </button>
+                      </a>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+
+
+        <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#"
+            class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+
+      </div>
+
+    </div>
+    </div>
+
+  </header>
+
+
+
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.sticky.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

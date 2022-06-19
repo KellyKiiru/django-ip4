@@ -1,4 +1,4 @@
-#!/home/moringa/Desktop/DJANGO/DJANGO-IP4/django-ip4/virtual/bin/python3.9
+#!/home/moringa/Desktop/DJANGO/DJANGO-IP4/django-ip4/virtual/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
