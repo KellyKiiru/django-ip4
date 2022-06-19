@@ -7,7 +7,9 @@ from django.contrib.auth import views as auth_views
 urlpatterns =[
     path('',views.homepage,name='homepage'),
     path('login/', auth_views.LoginView.as_view(),name='login'),
-    path('logout/', auth_views.LogoutView.as_view(),name='logout'),\
+    path('logout/', auth_views.LogoutView.as_view(),name='logout'),
+    path('profile/<username>',views.profile,name='profile'),
+    path('edit_profile/<username>',views.edit_profile,name='edit_profile'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
