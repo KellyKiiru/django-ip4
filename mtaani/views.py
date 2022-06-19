@@ -22,19 +22,20 @@ def homepage(request):
     return render(request, 'all-pages/homepage.html',context)
 
 
-def profile(request,username):
+def profile(request):
     
     return render(request, 'all-pages/profile.html')
 
 def edit_profile(request,username):
     user = User.objects.get(username=username)
     if request.method == 'POST':
-        form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        form = UpdateProfileForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('profile', user.username)
+            return redirect('profile')
     else:
-        form = UpdateProfileForm(instance=request.user.profile)
+        form = UpdateProfileForm()
+    return render(request, 'all-pages/edit_profile.html', {'form': form})
         
 def hoods(request):
     all_hoods = Neighbourhood.objects.all()
