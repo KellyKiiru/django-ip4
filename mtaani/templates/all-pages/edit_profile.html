@@ -1,11 +1,12 @@
 {% extends 'all-pages/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
+<div>
+    <h4>Welcome: {{request.user.username}} </h4>
+</div>
 <div class="container mt-5">
-    <div class="row mt-5">
-        <h3>Update Profile</h3>
-        <div class="col-md-4" style="height:100%; background-color: rgba(60,177,212,255);color: white;">
+    <div class="row ">
+        <div class="col-md-4" style="height:100%; background-color: rgba(60,177,212,255);">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
@@ -23,7 +24,12 @@
             </div>
 
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-4" style="position: relative; top: 50%;">
+           
+        </div>
+    </div>
+    <div class="col-md-4" style="position: relative; top: 50%;">
+        <h3>Update Profile</h3>
     </div>
 </div>
 
