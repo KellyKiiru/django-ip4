@@ -1,0 +1,20 @@
+{% extends 'all-pages/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container bg-white newhood">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h3 class="text-center">Want to add a business for your neighbourhood?</h3> <hr>
+            <h4 class="text-center">Go ahead</h4>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-sm btn-success">Add Business</button>
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+{% endblock %}
