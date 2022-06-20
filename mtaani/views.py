@@ -60,10 +60,24 @@ def create_new_hood(request):
     else:
         form = NeighbourhoodForm()
     return render(request, 'all-pages/new_hood.html', {'form': form})
-        
+
 def hoods(request):
     all_hoods = Neighbourhood.objects.all()
     context = {
         'all_hoods': all_hoods,
     }
     return render(request, 'all-pages/all_hoods.html', context)
+
+@login_required
+def add_business(request):
+    form = BusinessForm()
+    if request.method == 'POST':
+        form = BusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.business_user = request.user
+            business.save()
+            return redirect('business')
+    else:
+        form = BusinessForm()
+    return redirect(request,'all-pages/business.html', {"form": form}) 
