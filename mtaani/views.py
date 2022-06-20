@@ -98,5 +98,5 @@ def leave_hood(request, id):
 
 def hood_members(request, post_neighbourhood_id):
     hood = Neighbourhood.objects.get(id=post_neighbourhood_id)
-    members = Profile.objects.filter(neighbourhood=hood)
+    members = Profile.objects.filter(profile_neighbourhood=hood)
     return render(request, 'all-pages/members.html', {'members': members})
