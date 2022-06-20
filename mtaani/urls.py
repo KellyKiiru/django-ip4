@@ -9,7 +9,7 @@ urlpatterns =[
     path('login/', auth_views.LoginView.as_view(),name='login'),
     path('logout/', auth_views.LogoutView.as_view(),name='logout'),
     path('profile/',views.profile,name='profile'),
-    path('edit_profile/<username>',views.edit_profile,name='edit_profile'),
+    path('edit_profile/<user_id>',views.edit_profile,name='edit_profile'),
     path('all-hoods/', views.hoods, name='hood'),
     path('new-hood/', views.create_new_hood, name='new-hood'),
 ]
