@@ -8,7 +8,7 @@ from django.db.models.signals import post_save
 class Neighbourhood(models.Model):
     neighbourhood_name = models.CharField(max_length=50)
     neighbourhood_location = models.CharField(max_length=60)
-    neighbourhood_admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='hood')
+    neighbourhood_admin = models.ForeignKey( User , on_delete=models.CASCADE, related_name='hood_admin')
     neighbourhood_hood_logo = models.ImageField(upload_to='images/')
     neighbourhood_description = models.TextField()
     neighbourhood_health_tell = models.IntegerField(null=True, blank=True)
@@ -30,14 +30,17 @@ class Neighbourhood(models.Model):
 
 class Profile(models.Model):
     profile_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    profile_name = models.CharField(max_length=80, blank=True)
     bio = models.TextField(max_length=254, blank=True)
     profile_picture = models.ImageField(upload_to='images/', default='default.png')
-    location = models.CharField(max_length=50, blank=True, null=True)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.SET_NULL, null=True, related_name='members', blank=True)
-    profile_email = models.EmailField(blank=True)
-    #def save_profile(self):
-    #    self.save()
+    profile_tell = models.IntegerField(blank=True)
+    
+    
+    def save_profile(self):
+        self.save()
+    
+   
+    def delete_profile(self):
+        self.delete()
         
     @classmethod
     def get_all_profiles(cls):
@@ -45,7 +48,7 @@ class Profile(models.Model):
         return profile
     
     def __str__(self):
-        return f'{self.profile_user.username} - profile'
+        return f'{self.profile_tell} - profile-tell'
 
 class Business(models.Model):
     business_user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
@@ -54,6 +57,9 @@ class Business(models.Model):
     business_description = models.TextField(blank=True)
     business_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='business')
 
+    def save_business(self):
+        self.save()
+    
     def __str__(self):
         return f'{self.business_name} Business'
 
@@ -71,8 +77,8 @@ class Post(models.Model):
     post_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="posts")
     post_title = models.CharField(max_length=255, blank=True)
     post_description = models.TextField(max_length=255)
-    post_profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
-    post_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    post_profile=models.ForeignKey(Profile, on_delete=models.CASCADE,related_name="post_owner")
+    post_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,related_name="post_neighbourhood")
     post_business = models.ForeignKey(Business, on_delete=models.CASCADE)
     
     def save_post(self):
