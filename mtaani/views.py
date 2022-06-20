@@ -83,20 +83,42 @@ def add_business(request):
         form = BusinessForm()
     return redirect(request,'all-pages/business.html', {"form": form}) 
 
+@login_required
 def join_hood(request, id):
     neighbourhood = get_object_or_404(Neighbourhood, id=id)
     request.user.profile.profile_neighbourhood = neighbourhood
     request.user.profile.save()
     return redirect('hood')
 
-
+@login_required
 def leave_hood(request, id):
     neighbourhood = get_object_or_404(Neighbourhood, id=id)
     request.user.profile.profile_neighbourhood = neighbourhood
     request.user.profile.save()
     return redirect('hood')
 
+@login_required
 def hood_members(request, post_neighbourhood_id):
     hood = Neighbourhood.objects.get(id=post_neighbourhood_id)
     members = Profile.objects.filter(profile_neighbourhood=hood)
     return render(request, 'all-pages/members.html', {'members': members})
+
+def single_hood(request, post_neighbourhood_id):
+    hood = Neighbourhood.objects.get(id=post_neighbourhood_id)
+    business = Business.objects.filter(business_neighbourhood=hood)
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            bsn_form = form.save(commit=False)
+            bsn_form.business_neighbourhood = hood
+            bsn_form.business_user = request.user.profile
+            bsn_form.save()
+            return redirect('single-hood', hood.id)
+    else:
+        form = BusinessForm()
+    context = {
+        'hood': hood,
+        'business': business,
+        'form': form,
+    }
+    return render(request, 'all-pages/single-hood.html', context)
