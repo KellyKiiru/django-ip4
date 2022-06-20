@@ -17,6 +17,7 @@ urlpatterns =[
     path('leave-hood/<id>', views.leave_hood, name='leave-hood'),
     path('single-hood/<post_neighbourhood_id>', views.single_hood, name='single-hood'),
     path('<post_neighbourhood_id>/members', views.hood_members, name='members'),
+    path('<post_neighbourhood_id>/new-post', views.create_post, name='new_post'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
