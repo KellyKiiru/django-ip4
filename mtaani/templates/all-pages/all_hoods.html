@@ -1,24 +1,26 @@
 {% extends 'all-pages/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        {% for hood in all_hoods %}
-        <div class="col-md-4 mb-4">
-            <div class="card" >
-                <img height="" src="{{ hood.neighbourhood_hood_logo.url }}" class="card-img-top" alt="{{ hood.neighbourhood_name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ hood.neighbourhood_name }}  ({{hood.neighbourhood_location}}) <span class="ml-4">{{hood.members.count}} member{{hood.members.count|pluralize}}</span></h5>
-                    <p class="card-text">{{hood.neighbourhood_description}}</p>
-                    {% if request.user.profile.neighbourhood == hood %}
-                    <a href="" class="btn btn-outline-danger btn-sm">Leave Hood</a>
-                    {% elif not request.user.profile.neighbourhood %}
-                    <a href="" class="btn btn-primary btn-sm">Join Hood</a>
-                    {% endif %}
+<div class="container-fluid" style="background-image: url('https://images.pexels.com/photos/4430308/pexels-photo-4430308.jpeg?auto=compress&cs=tinysrgb&w=600'); background-repeat: no-repeat; background-size: cover; background-position:center; background-attachment: fixed;">
+    <div class="container" style="margin-top: 5%;">
+        <div class="row">
+            {% for hood in all_hoods %}
+            <div class="col-md-4 mb-4 mt-4">
+                <div class="card" >
+                    <img height="" src="{{ hood.neighbourhood_hood_logo.url }}" class="card-img-top" alt="{{ hood.neighbourhood_name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ hood.neighbourhood_name }}  ({{hood.neighbourhood_location}}) <span class="ml-4">{{hood.members.count}} member{{hood.members.count|pluralize}}</span></h5>
+                        <p class="card-text">{{hood.neighbourhood_description}}</p>
+                        {% if request.user.profile.neighbourhood == hood %}
+                        <a href="" class="btn btn-outline-danger btn-sm">Leave Hood</a>
+                        {% elif not request.user.profile.neighbourhood %}
+                        <a href="" class="btn btn-primary btn-sm">Join Hood</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
 {% endblock %}
