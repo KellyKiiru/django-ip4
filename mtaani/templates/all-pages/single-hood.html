@@ -23,7 +23,7 @@
                                 &nbsp;<strong>{{hood.police_number}}</strong> |
                                 <span class="text-info">Hospital Number</span> <strong>{{hood.neighbourhood_health_tell}}</strong></p>
                                 <p class="card-text">Administrator: <small class="text-muted">
-                                    {{ hood.neighbourhood_admin.user.username }}</small></p>
+                                    {{ hood.neighbourhood_admin.username }}</small></p>
                         </div>
                     </div>
                 </div>
@@ -35,6 +35,7 @@
             <div class="col-md-12">
                 <a href="" class="btn btn-sm btn-outline-info mb-4 mr-4" data-toggle="modal" data-target="#ModalCenter">Add
                     Business</a>
+                    <a class="btn btn-sm btn-outline-info mb-4" href="{% url 'new_post' hood.id %}">New Post</a>
                 {% if hood.neighbourhood_admin == user.profile %}
                 <a href="{% url 'members' hood.id %}" class="btn btn-sm btn-outline-info mb-4 ml-4">Members</a>
                 {% endif %}
