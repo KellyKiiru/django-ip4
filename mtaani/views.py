@@ -63,6 +63,7 @@ def create_new_hood(request):
 
 def hoods(request):
     all_hoods = Neighbourhood.objects.all()
+    all_hoods = all_hoods[::-1]
     context = {
         'all_hoods': all_hoods,
     }
@@ -81,3 +82,21 @@ def add_business(request):
     else:
         form = BusinessForm()
     return redirect(request,'all-pages/business.html', {"form": form}) 
+
+def join_hood(request, id):
+    neighbourhood = get_object_or_404(Neighbourhood, id=id)
+    request.user.profile.profile_neighbourhood = neighbourhood
+    request.user.profile.save()
+    return redirect('hood')
+
+
+def leave_hood(request, id):
+    neighbourhood = get_object_or_404(Neighbourhood, id=id)
+    request.user.profile.profile_neighbourhood = neighbourhood
+    request.user.profile.save()
+    return redirect('hood')
+
+def hood_members(request, post_neighbourhood_id):
+    hood = Neighbourhood.objects.get(id=post_neighbourhood_id)
+    members = Profile.objects.filter(neighbourhood=hood)
+    return render(request, 'all-pages/members.html', {'members': members})
