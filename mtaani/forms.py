@@ -10,7 +10,7 @@ from django import forms
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ('profile_user','Neighbourhood')
+        exclude = ('profile_user',)
 
 
 class NeighbourhoodForm(forms.ModelForm):
