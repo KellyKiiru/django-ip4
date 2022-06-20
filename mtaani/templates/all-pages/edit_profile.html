@@ -2,18 +2,28 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container bg-white editprofile" style="margin-top:4% ">
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <h3 class="text-center">Update Profile</h3>
-            <form action="" method="post" novalidate enctype="multipart/form-data">
+<div class="container mt-5">
+    <div class="row mt-5">
+        <h3>Update Profile</h3>
+        <div class="col-md-4" style="height:100%; background-color: rgba(60,177,212,255);color: white;">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form | crispy }}
-                <button class="btn btn-sm btn-outline-success"> Update</button>
+                {{form|crispy}}
+                <input style="color: black;" class="btn btn-info btn-sm" type="submit" value="Update">
             </form>
         </div>
-        <div class="col-md-1"></div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-8">
+
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 
