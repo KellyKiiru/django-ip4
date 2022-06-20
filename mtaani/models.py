@@ -33,7 +33,8 @@ class Profile(models.Model):
     bio = models.TextField(max_length=254, blank=True)
     profile_picture = models.ImageField(upload_to='images/', default='default.png')
     profile_tell = models.IntegerField(blank=True)
-    
+    profile_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.SET_NULL, null=True, related_name='members', blank=True)
+
     
     def save_profile(self):
         self.save()
