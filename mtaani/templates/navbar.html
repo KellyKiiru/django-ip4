@@ -29,7 +29,7 @@
                   <ul class="navbar-nav mr-auto">
                     <li>
                       <div class="col-11 col-xl-2">
-                        <a href="index.html" class="text-white mb-0"><img class="mb-0 site-logo" height="50px"
+                        <a href="/" class="text-white mb-0"><img class="mb-0 site-logo" height="50px"
                             src="https://www.pngkey.com/png/full/235-2350076_gmw-host-clipart-library-people-icon-png-white.png"
                             alt="logo-icon"></a>
                       </div>
@@ -55,7 +55,7 @@
                           </a>
                           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                               <a class="dropdown-item text-center" href=" {% url 'profile'%} " style="font-size: medium;">Profile</a>
-                              <a class="dropdown-item text-center" href=" {% url 'edit_profile' user.username %}" style="font-size: medium;">Edit profile</a>
+                              <a class="dropdown-item text-center" href=" {% url 'edit_profile' user.id %}" style="font-size: medium;">Edit profile</a>
                               <a href="/accounts/logout/" class="text-secondary text-center dropdown-item" style="font-size: medium;">Log Out</a>
       
       
@@ -64,9 +64,9 @@
                       {% else %}
                       <a href="{% url 'login'%}" class="login btn btn-sm btn-info" style="font-size: medium;"> REGISTER/LOGIN </a>
                       {% endif %}
-                      <a href="">
+                      <a href="{% url 'new-hood' %}">
                           <button class="btn btn-info btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl" style="font-size: medium;">
-                              
+                              Add Hood
                           </button>
                       </a>
                   </ul>
