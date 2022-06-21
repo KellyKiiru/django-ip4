@@ -7,6 +7,8 @@ django-clearcache==1.2.1
 django-crispy-forms==1.14.0
 django-decouple==2.1
 django-on-heroku==1.1.2
+django-registration-redux==2.10
+Pillow==9.1.1
 psycopg2-binary==2.9.3
 python-decouple==3.6
 soupsieve==2.3.2.post1
