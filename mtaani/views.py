@@ -10,14 +10,10 @@ from .forms import *
 
 def homepage(request):
     title =  "homepage"
-    posts = Post.objects.all()
-    neighbourhoods = Neighbourhood.objects.all()
-    profiles = Profile.objects.all()
+    all_hoods = Neighbourhood.objects.all()
     context = {
         "title": title,
-        "profiles": profiles,
-        "neighbourhoods": neighbourhoods,
-        "posts":posts,
+        "all_hoods": all_hoods,
     }
     return render(request, 'all-pages/homepage.html',context)
 
