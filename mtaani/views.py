@@ -106,6 +106,7 @@ def hood_members(request, post_neighbourhood_id):
 def single_hood(request, post_neighbourhood_id):
     hood = Neighbourhood.objects.get(id=post_neighbourhood_id)
     business = Business.objects.filter(business_neighbourhood=hood)
+    posts = Post.objects.filter(post_neighbourhood = hood)
     if request.method == 'POST':
         form = BusinessForm(request.POST)
         if form.is_valid():
@@ -120,6 +121,7 @@ def single_hood(request, post_neighbourhood_id):
         'hood': hood,
         'business': business,
         'form': form,
+        'posts': posts,
     }
     return render(request, 'all-pages/single-hood.html', context)
 
@@ -136,3 +138,18 @@ def create_post(request, post_neighbourhood_id):
     else:
         form = NewPostForm()
     return render(request, 'all-pages/post.html', {'form': form})
+
+def search_business(request):
+    if request.method == 'GET':
+        business_name = request.GET.get('post_title')
+        results = Business.objects.filter(business_name__icontains=business_name).all()
+        display_message = f'business_name'
+        
+        context = {
+            'results': results,
+            'display_message': display_message
+        }
+        return render (request, 'all-pages/search-results.html', context)
+    else:
+        display_message = " You have not searched for any business"
+    return render (request,'all-pages/search-results.html')
