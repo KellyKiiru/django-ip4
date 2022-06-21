@@ -8,7 +8,7 @@ from django.db.models.signals import post_save
 class Neighbourhood(models.Model):
     neighbourhood_name = models.CharField(max_length=50)
     neighbourhood_location = models.CharField(max_length=60)
-    neighbourhood_admin = models.ForeignKey( User , on_delete=models.CASCADE, related_name='hood_admin')
+    neighbourhood_admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_neighbourhood')
     neighbourhood_hood_logo = models.ImageField(upload_to='images/')
     neighbourhood_description = models.TextField()
     neighbourhood_health_tell = models.IntegerField(null=True, blank=True)
@@ -26,6 +26,7 @@ class Neighbourhood(models.Model):
     @classmethod
     def find_neighborhood(cls, neighborhood_id):
         return cls.objects.filter(id=neighborhood_id)
+    
 
 
 class Profile(models.Model):
@@ -49,12 +50,13 @@ class Profile(models.Model):
         return profile
     
     def __str__(self):
-        return f'{self.profile_tell} - profile-tell'
+        return f'{self.profile_user.username} - profile'
+    
 
 class Business(models.Model):
     business_user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
     business_name = models.CharField(max_length=120)
-    business_email = models.EmailField(max_length=254)
+    business_email = models.EmailField(max_length=254, blank=True)
     business_description = models.TextField(blank=True)
     business_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='business')
 
@@ -73,14 +75,13 @@ class Business(models.Model):
     @classmethod
     def search_business(cls, name):
         return cls.objects.filter(business_name__icontains=name).all()
+    
 
 class Post(models.Model):
-    post_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="posts")
     post_title = models.CharField(max_length=255, blank=True)
     post_description = models.TextField(max_length=255)
-    post_profile=models.ForeignKey(Profile, on_delete=models.CASCADE,related_name="post_owner")
+    post_user=models.ForeignKey(Profile, on_delete=models.CASCADE,related_name="post_owner")
     post_neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,related_name="post_neighbourhood")
-    post_business = models.ForeignKey(Business, on_delete=models.CASCADE)
     
     def save_post(self):
         self.save()
@@ -100,3 +101,4 @@ class Post(models.Model):
         
     def __str__(self):
         return f'{self.post_title}'
+    
