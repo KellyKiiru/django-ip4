@@ -122,3 +122,17 @@ def single_hood(request, post_neighbourhood_id):
         'form': form,
     }
     return render(request, 'all-pages/single-hood.html', context)
+
+def create_post(request, post_neighbourhood_id):
+    hood = Neighbourhood.objects.get(id=post_neighbourhood_id)
+    if request.method == 'POST':
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.post_neighbourhood = hood
+            new_post.post_user = request.user.profile
+            new_post.save()
+            return redirect('single-hood', hood.id)
+    else:
+        form = NewPostForm()
+    return render(request, 'all-pages/post.html', {'form': form})
