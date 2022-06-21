@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container" style="margin-top:4%">
+<div class="container" style="margin-top:7%">
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-3">
@@ -21,7 +21,7 @@
                             </h6>
                             <p class="card-text">{{hood.neighbourhood_description}}</p>
                             <p class="card-text"><span class="text-info">Police Contacts</span>
-                                &nbsp;<strong>{{hood.police_number}}</strong> |
+                                &nbsp;<strong>{{hood.neighbourhood_police_number}}</strong> |
                                 <span class="text-info">Hospital Number</span> <strong>{{hood.neighbourhood_health_tell}}</strong></p>
                                 <p class="card-text">Administrator: <small class="text-muted">
                                     {{ hood.neighbourhood_admin.username }}</small></p>
