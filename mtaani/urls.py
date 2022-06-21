@@ -19,6 +19,7 @@ urlpatterns =[
     path('<post_neighbourhood_id>/members', views.hood_members, name='members'),
     path('<post_neighbourhood_id>/new-post', views.create_post, name='new_post'),
     path('search-business/', views.search_business, name='search-business'),
+    path('search-all-businesses/', views.search_all_business, name='search-all-businesses'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

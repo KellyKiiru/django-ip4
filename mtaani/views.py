@@ -153,3 +153,18 @@ def search_business(request):
     else:
         display_message = " You have not searched for any business"
     return render (request,'all-pages/search-results.html')
+
+def search_all_business(request):
+    if request.method == 'GET':
+        business_name = request.GET.get('title')
+        results = Business.objects.filter(business_name__icontains=business_name).all()
+        display_message = f'business_name'
+        
+        context = {
+            'results': results,
+            'display_message': display_message
+        }
+        return render (request, 'all-pages/search-results.html', context)
+    else:
+        display_message = " You have not searched for any business"
+    return render (request,'all-pages/search-results.html')
