@@ -1,13 +1,2 @@
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-     aria-haspopup="true"
-     aria-expanded="false">{{ user.username|title }} <img style="height:40px;" class="rounded-circle nav-img"
-                                                          src="{{user.profile.profile_picture.url}}"
-                                                          alt="{{user.username}}">
-  </a>
-  <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-      <a href="/accounts/logout/" class="text-secondary text-center dropdown-item" style="font-size: medium;">Log Out</a>
 
 
-  </div>
-</li>
